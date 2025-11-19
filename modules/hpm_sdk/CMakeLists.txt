@@ -11,6 +11,12 @@ set(HPM_SDK_BINARY_DIR ${CMAKE_BINARY_DIR}/hpm_sdk)
 set(HPM_BOARD_DIR ${CONFIG_BOARD})
 string(TOUPPER ${SOC_NAME} HPM_SOC_TOUPPER)
 set(HPM_SOC ${HPM_SOC_TOUPPER})
+
+if(HPM_SOC STREQUAL "HPM5321")
+  # HPM5321 shares the same SDK implementation as HPM5361
+  set(HPM_SOC HPM5361)
+endif()
+
 string(TOUPPER ${SOC_SERIES} HPM_SOC_SERIES_TOUPPER)
 set(HPM_SOC_SERIES ${HPM_SOC_SERIES_TOUPPER})
 set(TOOLCHAIN_VARIANT "zephyr")
@@ -26,6 +32,12 @@ set(HPM_SDK_GCC_STARTUP_LIB hpm_sdk_gcc_startup_lib)
 add_library(${HPM_SDK_GCC_STARTUP_LIB} INTERFACE)
 set(USE_CUSTOM_STARTUP 1)
 set(USE_CUSTOM_LINKER 1)
+
+if(NOT COMMAND get_toolchain_gcc_spec)
+  function(get_toolchain_gcc_spec spec)
+    set(${spec} 0 PARENT_SCOPE)
+  endfunction()
+endif()
 
 file(STRINGS "${CMAKE_BINARY_DIR}/zephyr/.config" CONFIG_LINES REGEX "^CONFIG_HAS_HPMSDK_[A-Za-z0-9_]+=")
 

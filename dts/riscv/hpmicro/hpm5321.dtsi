@@ -1,0 +1,5 @@
+#include <hpmicro/hpm53xx.dtsi>
+
+/ {
+
+};

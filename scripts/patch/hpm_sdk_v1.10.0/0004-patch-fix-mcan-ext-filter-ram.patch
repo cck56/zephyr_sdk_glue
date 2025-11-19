@@ -1,0 +1,23 @@
+diff --git a/hpm_sdk/drivers/src/hpm_mcan_drv.c b/hpm_sdk/drivers/src/hpm_mcan_drv.c
+index 9c50386f6..a81024d3d 100644
+--- a/hpm_sdk/drivers/src/hpm_mcan_drv.c
++++ b/hpm_sdk/drivers/src/hpm_mcan_drv.c
+@@ -732,7 +732,7 @@ hpm_stat_t mcan_config_ram(MCAN_Type *ptr, mcan_ram_config_t *config)
+             filter_config.list_size = config->ext_filter_elem_count;
+             filter_config.list_start_addr = start_addr;
+             ptr->XIDFC = filter_config.reg_val;
+-            start_addr += MCAN_FILTER_ELEM_EXT_ID_SIZE * (uint32_t) config->std_filter_elem_count;
++            start_addr += MCAN_FILTER_ELEM_EXT_ID_SIZE * (uint32_t) config->ext_filter_elem_count;
+         } else {
+             ptr->XIDFC = MCAN_RAM_ADDR_INVALID;
+         }
+@@ -855,7 +855,7 @@ hpm_stat_t mcan_config_ram_with_flexible_config(MCAN_Type *ptr, mcan_ram_flexibl
+         }
+ 
+         if (config->enable_ext_filter) {
+-            if (config->std_filter_config.list_size > MCAN_EXT_FILTER_ELEM_CNT_MAX) {
++            if (config->ext_filter_config.list_size > MCAN_EXT_FILTER_ELEM_CNT_MAX) {
+                 break;
+             }
+             ptr->XIDFC = config->ext_filter_config.reg_val;
+
