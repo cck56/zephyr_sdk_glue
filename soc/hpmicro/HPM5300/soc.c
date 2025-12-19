@@ -47,6 +47,12 @@ static void soc_init_clock(void)
     clock_add_to_group(clock_can3, 0);
 #endif
 
+#ifdef CONFIG_WATCHDOG
+    /* Enable watchdog clocks */
+    clock_add_to_group(clock_watchdog0, 0);
+    clock_add_to_group(clock_watchdog1, 0);
+#endif
+
     /* Connect Group0 to CPU0 */
     clock_connect_group_to_cpu(0, 0);
 

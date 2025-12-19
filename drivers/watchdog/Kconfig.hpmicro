@@ -1,0 +1,19 @@
+# Copyright (c) 2024-2025
+# SPDX-License-Identifier: Apache-2.0
+
+config WDT_HPMICRO_EWDG
+	bool "HPMicro Enhanced Watchdog (EWDG) driver"
+	default y
+	depends on DT_HAS_HPMICRO_HPM_EWDG_ENABLED
+	help
+	  Enable HPMicro EWDG watchdog driver.
+
+if WDT_HPMICRO_EWDG
+
+config WDT_HPMICRO_EWDG_INTERRUPT
+	bool "Enable EWDG timeout interrupt"
+	default n
+	help
+	  Enable interrupt before watchdog reset.
+
+endif # WDT_HPMICRO_EWDG

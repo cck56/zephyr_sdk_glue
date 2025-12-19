@@ -353,6 +353,26 @@
 			num-bidir-endpoints = <16>;
 			status = "disabled";
 		};
+
+		ewdg0: watchdog@f00b0000 {
+			compatible = "hpmicro,hpm-ewdg";
+			reg = <0xf00b0000 0x4000>;
+			interrupts = <32 1>;
+			interrupt-parent = <&plic>;
+			clk-source = "bus";
+			timeout-ms = <2000>;
+			status = "disabled";
+		};
+
+		ewdg1: watchdog@f00b4000 {
+			compatible = "hpmicro,hpm-ewdg";
+			reg = <0xf00b4000 0x4000>;
+			interrupts = <33 1>;
+			interrupt-parent = <&plic>;
+			clk-source = "bus";
+			timeout-ms = <2000>;
+			status = "disabled";
+		};
 	};
 };
 

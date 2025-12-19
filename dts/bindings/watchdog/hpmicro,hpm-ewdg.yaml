@@ -1,0 +1,33 @@
+# Copyright (c) 2024-2025 HPMicro
+# SPDX-License-Identifier: Apache-2.0
+
+description: HPMicro Enhanced Watchdog (EWDG)
+
+compatible: "hpmicro,hpm-ewdg"
+
+include: [base.yaml]
+
+properties:
+  reg:
+    required: true
+
+  interrupts:
+    required: false
+    description: |
+      Optional interrupt for timeout warning before reset.
+
+  clk-source:
+    type: string
+    default: "osc32k"
+    enum:
+      - "bus"
+      - "osc32k"
+    description: |
+      Clock source for EWDG counter.
+
+  timeout-ms:
+    type: int
+    default: 2000
+    description: |
+      Default watchdog timeout in milliseconds.
+      Range depends on clock frequency and divider settings.
